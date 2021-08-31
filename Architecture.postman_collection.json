@@ -1,0 +1,2409 @@
+{
+	"info": {
+		"_postman_id": "6f60839f-44f6-4e36-90be-9264e0721e2e",
+		"name": "Architecture",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Récit1",
+			"item": [
+				{
+					"name": "CreateAccessPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d9ec1201-273d-4b39-8a03-cee1cb482915",
+								"exec": [
+									"pm.environment.set(\"AccessPermitLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fc8fa239-5f23-445e-9843-89549a44f2d8",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"Automobile\",\r\n    \"user\": {\r\n        \"name\": \"Tony Stark\",\r\n        \"birthDate\": \"1970-05-29\",\r\n        \"gender\": \"O\",\r\n        \"age\": 50\r\n    },\r\n    \"vehicle\": {\r\n        \"brand\": \"Lamborghini\",\r\n        \"model\": \"Aventador S\",\r\n        \"vehicleConsumption\": \"Gourmande\",\r\n        \"year\": 2018,\r\n        \"licensePlate\": \"G4L2P5\"\r\n    },\r\n    \"period\": \"1j/sEmAiNe/sEsSiOn\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"deliveryMode\" : \"SNAIL_MAIL\",\r\n    \"deliveryAddress\" : \"1235 rue de l'amour QC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAccessPermitWithBadPeriod",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "98307b5f-f3ba-4159-8b89-4590078d4190",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "95cf2c44-2644-41fa-9ac5-952ad7decda1",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"Automobile\",\r\n    \"user\": {\r\n        \"name\": \"Tony Stark\",\r\n        \"birthDate\": \"1970-05-29\",\r\n        \"gender\": \"O\",\r\n        \"age\": 50\r\n    },\r\n    \"vehicle\": {\r\n        \"brand\": \"Lamborghini\",\r\n        \"model\": \"Aventador S\",\r\n        \"vehicleConsumption\": \"Gourmande\",\r\n        \"year\": 2018,\r\n        \"licensePlate\": \"G4L2P5\"\r\n    },\r\n    \"period\": \"Always\",\r\n    \"dayOfTheWeek\": \"{{today}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAccessPermitWithBadConsumption",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f9c7cb9-3d62-4c2a-906e-29f57bfebbe1",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8c7e7fb6-952b-4ef0-a76e-dec210aef461",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"Automobile\",\r\n    \"user\": {\r\n        \"name\": \"Tony Stark\",\r\n        \"birthDate\": \"1970-05-29\",\r\n        \"gender\": \"O\",\r\n        \"age\": 50\r\n    },\r\n    \"vehicle\": {\r\n        \"brand\": \"Lamborghini\",\r\n        \"model\": \"Aventador S\",\r\n        \"vehicleConsumption\": \"0\",\r\n        \"year\": 2018,\r\n        \"licensePlate\": \"G4L2P5\"\r\n    },\r\n    \"period\": \"1j/sEmAiNe/sEsSiOn\",\r\n    \"dayOfTheWeek\": \"{{today}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAccessPermitWithBadDayOfTheWeek",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38ef00be-1967-4ded-9911-ab3c528bfd2d",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f76bea02-adc4-4aba-8b1a-c4a694ee57a6",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"Automobile\",\r\n    \"user\": {\r\n        \"name\": \"Tony Stark\",\r\n        \"birthDate\": \"1970-05-29\",\r\n        \"gender\": \"O\",\r\n        \"age\": 50\r\n    },\r\n    \"vehicle\": {\r\n        \"brand\": \"Lamborghini\",\r\n        \"model\": \"Aventador S\",\r\n        \"vehicleConsumption\": \"Gourmande\",\r\n        \"year\": 2018,\r\n        \"licensePlate\": \"G4L2P5\"\r\n    },\r\n    \"period\": \"1j/sEmAiNe/sEsSiOn\",\r\n    \"dayOfTheWeek\": \"Nice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "16bda8f3-28b9-4000-adf5-44213fe44adc",
+								"exec": [
+									"pm.environment.set(\"AccessCode\", pm.response.json().accessCode);\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AccessPermitLocation}}",
+							"host": [
+								"{{AccessPermitLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessPermitBadAccessPermitId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4cf6f789-ed93-4223-ab05-3be36d29bb7a",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access/5",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit2",
+			"item": [
+				{
+					"name": "CreateParkingPermitEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2bb1299-d4e0-4e15-b0e4-eb0e7665c69e",
+								"exec": [
+									"pm.environment.set(\"ParkingPermitLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a3cecb70-4a65-4566-8ab1-d6d9038a0ce6",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"EMAIL\",\r\n    \"deliveryAddress\" : \"ulaval74archi@gmail.com\",\r\n    \"zone\" : \"zone3\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateParkingPermitMail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5e4b962b-cf8d-45d7-a2af-aff147a749db",
+								"exec": [
+									"pm.environment.set(\"ParkingPermitLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b0740f7e-6a24-47f4-a41a-adfb4dbd9d39",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "32e0e468-25e6-4803-8c3e-5d816147972b",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"SNAIL_MAIL\",\r\n    \"deliveryAddress\" : \"1235 rue de l'amour QC\",\r\n    \"zone\" : \"Zone3\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateParkingPermitSSPOffice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b842941e-bc21-4ad0-b5cc-518c9fd28898",
+								"exec": [
+									"pm.environment.set(\"ParkingPermitLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "14391869-69be-4677-995e-44b1c8ea0552",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"id": "bdb7dbe5-6190-490b-b9bf-8cf203805b78",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"SSP_OFFICE\",\r\n    \"zone\" : \"Zone3\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateParkingPermitInvalidEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3fc9189f-3398-4f45-9112-2b984b0bf9a5",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0f1bfb9d-1ecd-47fa-b40b-54f3797ec5a1",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"EMAIL\",\r\n    \"deliveryAddress\" : \"\",\r\n    \"zone\" : \"zone3\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateParkingPermitInvalidZone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f520de39-4a9b-4d8d-b92e-5a9a2b799562",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "25d42bdf-f053-4684-a2c2-3746211a2591",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"EMAIL\",\r\n    \"deliveryAddress\" : \"\",\r\n    \"zone\" : \"pisine\",\r\n    \"dayOfTheWeek\": \"{{today}}\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateParkingPermitInvalidDayOfTheWeek",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2cd2ed1a-107d-4e7f-a910-492b79bcb6fb",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "62dc3660-ac4e-42a8-9598-7f21783ef879",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliveryMode\" : \"EMAIL\",\r\n    \"deliveryAddress\" : \"yaho@nex.com\",\r\n    \"zone\" : \"zone3\",\r\n    \"dayOfTheWeek\": \"Vindredi\",\r\n    \"period\": \"1j/sem/session\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetParkingPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba24c31d-4c18-41b8-8173-3d65d342955c",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ParkingPermitLocation}}",
+							"host": [
+								"{{ParkingPermitLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetParkingPermitBadParkingPermitId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d5e1bf0-2220-442e-b4bb-92bfa741eba8",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/permit/5",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"permit",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit3",
+			"item": [
+				{
+					"name": "AccessParkingValid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf17df63-e093-46db-91fb-fbb9583952ab",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessCode\" : \"{{AccessCode}}\",\r\n    \"accessType\" : \"Automobile\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access/request",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AccessParkingErrorAccessCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d84c4df-ace3-4283-be86-d2a698859b47",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessCode\": \"@#f11\",\r\n    \"accessType\" : \"Automobile\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access/request",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access",
+								"request"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit4",
+			"item": [
+				{
+					"name": "ContraventionWithoutInfraction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "96638d60-b0d6-48e7-bb3b-b26d49572a1e",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.environment.set(\"ContraventionLocation\", pm.response.headers.get(\"Location\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\" : \"Zone3\",\r\n    \"hour\": \"15:25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ParkingPermitLocation}}/verify",
+							"host": [
+								"{{ParkingPermitLocation}}"
+							],
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContraventionGiveInfractionZone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a5997b0-cd6f-4d23-8517-58b99ee919c2",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.environment.set(\"ContraventionLocation\", pm.response.headers.get(\"Location\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\" : \"zone2\",\r\n    \"hour\": \"15:25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ParkingPermitLocation}}/verify",
+							"host": [
+								"{{ParkingPermitLocation}}"
+							],
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getContravention",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aed1c2f0-2942-4def-9cad-1d10a89ebe86",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ContraventionLocation}}",
+							"host": [
+								"{{ContraventionLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payContravention",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6da58d2c-be5a-409f-bd8e-88ee922282d4",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ContraventionLocation}}/pay",
+							"host": [
+								"{{ContraventionLocation}}"
+							],
+							"path": [
+								"pay"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit5",
+			"item": [
+				{
+					"name": "PostParkingUsageZoneR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0419f18-4bb2-4798-98ed-dba821893c36",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\": \"zoneR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/usage",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostParkingUsageZone1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ad4fae1-059c-482e-b5fd-9edc380d8680",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\": \"zone1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/usage",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostParkingUsageZone2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ac0a193-b7c0-4178-b18d-f50798fe7a11",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\": \"zone2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/usage",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMonthlyReport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f696fa2-eced-432e-a69b-8c4c6335c072",
+								"exec": [
+									"const expectedResponse = {\r",
+									"    total: 0,\r",
+									"    byZone: [\r",
+									"        {\r",
+									"            zone: \"Zone1\",\r",
+									"            count: 0\r",
+									"        },\r",
+									"        {\r",
+									"            zone: \"Zone2\",\r",
+									"            count: 0\r",
+									"        }\r",
+									"    ],\r",
+									"    averagePerDay: 0,\r",
+									"    busiestDay: {\r",
+									"        date: \"2020-07-11\",\r",
+									"        count: 0\r",
+									"    },\r",
+									"    leastBusyDay: {\r",
+									"        date: \"2020-07-14\",\r",
+									"        count: 0\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4a11766c-cb59-48de-88f5-3f72401d2cd2",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('month', moment().format('M'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/usage/monthly?month={{month}}",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"usage",
+								"monthly"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "{{month}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDailyReport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "179165e4-a78d-4cc3-a859-5dafd9ab18fd",
+								"exec": [
+									"const expectedResponse = {\r",
+									"    total: 0,\r",
+									"    byZone: [\r",
+									"        {\r",
+									"            zone: \"Zone1\",\r",
+									"            count: 0\r",
+									"        },\r",
+									"        {\r",
+									"            zone: \"Zone2\",\r",
+									"            count: 0\r",
+									"        }\r",
+									"    ],\r",
+									"}\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3c7457ac-4d89-47ed-b808-a65024178d4b",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('month', moment().format('M'));\r",
+									"pm.environment.set('day', moment().format('D'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/usage/daily?month={{month}}&day={{day}}",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"usage",
+								"daily"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "{{month}}"
+								},
+								{
+									"key": "day",
+									"value": "{{day}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit6",
+			"item": [
+				{
+					"name": "CreateInitiative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "89222c1d-495a-4f1a-b538-9303123d41b5",
+								"exec": [
+									"pm.environment.set(\"InitiativeLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Campagne de sensibilité xyz1\",\r\n    \"cost\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/initiative",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddFundsToInitiative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7425e5de-17ab-4717-80b1-ed93de7509af",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c328b420-4126-4e0c-be5e-3f80896d6e64",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cost\": 69\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{InitiativeLocation}}",
+							"host": [
+								"{{InitiativeLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInitiatives",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "331e224f-f360-4c2c-b6a4-b38014006937",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/initiative",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostTooExpensiveInitiative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c70a2392-3408-4a45-9a75-3966a4513adf",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Campagne de sensibilité xyz\",\r\n    \"cost\": 50000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/initiative",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"initiative"
+							]
+						},
+						"description": "Creating an Initiative"
+					},
+					"response": []
+				},
+				{
+					"name": "GetInitiativeBudget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fbfceda3-1606-45eb-ae83-05f5fffe05fb",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/budget",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"budget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SetInitiativeBudgetPercent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b3d1b666-0a71-412c-98fa-ad62bb3b9128",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"percentForInitiatives\": 42.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/budget",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"budget"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit7",
+			"item": [
+				{
+					"name": "getPriceAccessPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "087ff9a4-094b-40a6-92b8-58d7142e9c58",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/price/access/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"price",
+								"access",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceAccessPermitWithVehicleConsumption",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dac991b7-1594-4c8c-80ac-a7d9a7dd40d1",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/price/access/gourmande",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"price",
+								"access",
+								"gourmande"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceAccessPermitWithBadVehicleConsumption",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02edcff5-59c2-4981-8f55-58970c5a4feb",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/price/access/pisine",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"price",
+								"access",
+								"pisine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceParkingPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ec063e6-6f29-4c71-8d79-e0eab63936f8",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/price/parking/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"price",
+								"parking",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceContravention",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "36a38dc6-4f49-4ac1-8763-0c2f80fc5463",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/price/contravention",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"price",
+								"contravention"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Récit obligatoire",
+			"item": [
+				{
+					"name": "CreateAccessPermitForBike",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f4b80d4d-bf40-48ec-88f6-069903031b50",
+								"exec": [
+									"pm.environment.set(\"AccessPermitLocation\", pm.response.headers.get(\"Location\"));\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cafddc61-7d94-49c8-b1ab-cb8ddb816962",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('today', moment().format('dddd'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessType\": \"Bike\",\r\n    \"user\": {\r\n        \"name\": \"Isabelle\",\r\n        \"birthDate\": \"1991-05-29\",\r\n        \"gender\": \"F\",\r\n        \"age\": 29\r\n    },\r\n    \"vehicle\": {\r\n        \"brand\": \"Giant\",\r\n        \"model\": \"Cypress DX\",\r\n        \"vehicleConsumption\": \"0 pollution\",\r\n        \"year\": 2018\r\n    },\r\n    \"period\": \"3 session\",\r\n    \"deliveryMode\" : \"SSP_OFFICE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ddf44639-9da3-4b81-8992-d0e89d27f37d",
+								"exec": [
+									"pm.environment.set(\"AccessCode\", pm.response.json().accessCode);\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AccessPermitLocation}}",
+							"host": [
+								"{{AccessPermitLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AccessParkingValid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9aac5e19-b2b0-4646-bfec-177858010577",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessCode\" : \"{{AccessCode}}\",\r\n    \"accessType\" : \"Bike\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/access/request",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"access",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostParkingUsageBike",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93e95d5b-4616-4ec1-a86b-a26c4c752d09",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zone\": \"ZoneBike\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/parking/usage",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parking",
+								"usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMonthlyReport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab7be409-30c1-4044-8ac1-60dfbc0ccbed",
+								"exec": [
+									"const expectedResponse = {\r",
+									"    total: 0,\r",
+									"    byZone: [\r",
+									"        {\r",
+									"            zone: \"Zone1\",\r",
+									"            count: 0\r",
+									"        },\r",
+									"        {\r",
+									"            zone: \"Zone2\",\r",
+									"            count: 0\r",
+									"        }\r",
+									"    ],\r",
+									"    averagePerDay: 0,\r",
+									"    busiestDay: {\r",
+									"        date: \"2020-07-11\",\r",
+									"        count: 0\r",
+									"    },\r",
+									"    leastBusyDay: {\r",
+									"        date: \"2020-07-14\",\r",
+									"        count: 0\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cc53d56b-197f-4775-b9f1-bce96dd7018a",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('month', moment().format('M'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/usage/monthly?month={{month}}",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"usage",
+								"monthly"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "{{month}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Démonstration",
+			"item": [
+				{
+					"name": "GetAccessPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbd06ae2-fb35-49ab-9900-1a1a5d58be90",
+								"exec": [
+									"pm.environment.set(\"AccessCode\", pm.response.json().accessCode);\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AccessPermitLocation}}",
+							"host": [
+								"{{AccessPermitLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetParkingPermit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4bc9cef1-5f9b-4c36-a2f5-42d5d3280a61",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ParkingPermitLocation}}",
+							"host": [
+								"{{ParkingPermitLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getContravention",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cdf0070-b440-4177-8555-f9705587bf71",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ContraventionLocation}}",
+							"host": [
+								"{{ContraventionLocation}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMonthlyReport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ac7fb4b-c36a-4681-8665-9f630e991d8d",
+								"exec": [
+									"const expectedResponse = {\r",
+									"    total: 0,\r",
+									"    byZone: [\r",
+									"        {\r",
+									"            zone: \"Zone1\",\r",
+									"            count: 0\r",
+									"        },\r",
+									"        {\r",
+									"            zone: \"Zone2\",\r",
+									"            count: 0\r",
+									"        }\r",
+									"    ],\r",
+									"    averagePerDay: 0,\r",
+									"    busiestDay: {\r",
+									"        date: \"2020-07-11\",\r",
+									"        count: 0\r",
+									"    },\r",
+									"    leastBusyDay: {\r",
+									"        date: \"2020-07-14\",\r",
+									"        count: 0\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2e4b6988-fba0-4615-8c8b-d79dc86438ce",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.environment.set('month', moment().format('M'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/report/usage/monthly?month={{month}}",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"report",
+								"usage",
+								"monthly"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "{{month}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInitiativeBudget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745e5d10-544e-4bd2-b84d-9c0f23631d04",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/budget",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"budget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInitiatives",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "adcaa7bc-cbd8-4e6e-9191-3ff888144781",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8080/api/sustainable-mobility/initiative",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sustainable-mobility",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
